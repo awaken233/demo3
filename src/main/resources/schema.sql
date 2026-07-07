@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS async_task_state (
+    id VARCHAR(64) PRIMARY KEY,
+    status VARCHAR(32) NOT NULL,
+    progress INT NOT NULL DEFAULT 0,
+    retry_count INT NOT NULL DEFAULT 0,
+    payload VARCHAR(512),
+    error_message VARCHAR(1024),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
