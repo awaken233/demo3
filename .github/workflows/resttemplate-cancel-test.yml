@@ -1,0 +1,21 @@
+name: RestTemplate cancel experiment
+
+on:
+  push:
+    branches:
+      - agent/resttemplate-future-cancel-test
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+          cache: maven
+      - name: Run experiment
+        working-directory: resttemplate-cancel-test
+        run: mvn -B -Dtest=RestTemplateFutureCancelTest test
