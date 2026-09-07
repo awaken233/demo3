@@ -1,0 +1,25 @@
+name: Verify Sonar S6671 behavior
+
+on:
+  push:
+    branches:
+      - sonar-s6671-promise-rejection-error
+  workflow_dispatch:
+
+jobs:
+  verify-runtime-behavior:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Show runtime comparison
+        run: node sonar-s6671-demo.js
+
+      - name: Assert before/after behavior
+        run: node sonar-s6671-test.js
