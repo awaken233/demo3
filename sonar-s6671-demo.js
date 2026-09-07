@@ -17,10 +17,19 @@ async function observe(label, fn) {
     console.log('instanceof Error:', reason instanceof Error);
     console.log('message:', reason?.message);
     console.log('stack:', reason?.stack);
+    return reason;
   }
 }
 
-(async () => {
-  await observe('non-compliant: reject string', nonCompliantExample);
-  await observe('compliant: reject Error', compliantExample);
-})();
+module.exports = {
+  nonCompliantExample,
+  compliantExample,
+  observe,
+};
+
+if (require.main === module) {
+  (async () => {
+    await observe('non-compliant: reject string', nonCompliantExample);
+    await observe('compliant: reject Error', compliantExample);
+  })();
+}
